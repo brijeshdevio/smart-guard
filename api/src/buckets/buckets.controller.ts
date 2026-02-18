@@ -80,4 +80,14 @@ export class BucketsController {
     const bucket = await this.bucketsService.deleteBucket(userId, bucketId);
     return apiResponse(res, { data: { bucket } });
   }
+
+  @Post(':id/rotate')
+  async rotateApiKey(
+    @CurrentUser('id') userId: string,
+    @Param('id') bucketId: string,
+    @Res() res: Response,
+  ) {
+    const apiKey = await this.bucketsService.rotateApiKey(userId, bucketId);
+    return apiResponse(res, { data: { bucket: { apiKey } } });
+  }
 }

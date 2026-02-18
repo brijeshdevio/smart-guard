@@ -59,3 +59,6 @@ Content-Type: application/json
 
 ### DELETE - /buckets/:id
 DELETE {{BASE_URL}}/buckets/9901f67f-2ac4-48b7-8e65-32165f1b5e51
+
+### POST - /buckets/:id/rotate
+POST {{BASE_URL}}/buckets/edf845fb-1d71-4a89-861e-f9c658583d88/rotate

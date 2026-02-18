@@ -124,4 +124,25 @@ export class BucketsService {
       throw new InternalServerErrorException('Failed to delete bucket.');
     }
   }
+
+  async rotateApiKey(userId: string, id: string): Promise<string> {
+    try {
+      const apiKey = this.randomToken();
+      const hashedKey = this.hashToken(apiKey);
+      await this.prismaService.bucket.update({
+        where: { id, userId },
+        data: { hashedKey },
+        select: { id: true },
+      });
+      return apiKey;
+    } catch (error: unknown) {
+      console.log(error);
+      if (error instanceof PrismaClientKnownRequestError) {
+        if (error.code === PRISMA_ERROR_CODES.NOT_FOUND) {
+          throw new NotFoundException(`Bucket with id ${id} not found.`);
+        }
+      }
+      throw new InternalServerErrorException('Failed to rotate api key.');
+    }
+  }
 }
