@@ -25,6 +25,8 @@ model User {
 
   buckets       Bucket[]
   refreshTokens RefreshToken[]
+
+  @@index([email])
 }
 
 model RefreshToken {
@@ -41,16 +43,15 @@ model RefreshToken {
 }
 
 model Bucket {
-  id          String  @id @default(uuid())
-  name        String
-  hashedKey   String  @unique
-  isActive    Boolean @default(true)
-  apiKey      String?
-  description String?
-
-  rateLimit     Int
-  dailyBudget   Float?
-  monthlyBudget Float?
+  id              String  @id @default(uuid())
+  name            String
+  hashedKey       String  @unique
+  isActive        Boolean @default(true)
+  description     String?
+  pricePerRequest Float   @default(0.1)
+  rateLimitRpm    Int?
+  dailyBudget     Float?
+  monthlyBudget   Float?
 
   userId String
   user   User   @relation(fields: [userId], references: [id])
@@ -61,7 +62,8 @@ model Bucket {
   usages Usage[]
 
   @@unique([userId, name])
-  @@index([hashedKey])
+  @@unique([userId, id])
+  @@index([userId, hashedKey])
 }
 
 model Usage {

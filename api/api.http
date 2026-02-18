@@ -33,3 +33,29 @@ POST {{BASE_URL}}/auth/refresh
 
 ### GET - /users/me
 GET {{BASE_URL}}/users/me
+
+### POST - /buckets
+POST {{BASE_URL}}/buckets
+Content-Type: application/json
+
+{
+    "name": "OpenAPI",
+    "pricePerRequest": 12
+}
+
+### GET - /buckets
+GET {{BASE_URL}}/buckets
+
+### GET - /buckets/:id
+GET {{BASE_URL}}/buckets/9901f67f-2ac4-48b7-8e65-32165f1b5e51
+
+### PATCH - /buckets/:id
+PATCH {{BASE_URL}}/buckets/9901f67f-2ac4-48b7-8e65-32165f1b5e51
+Content-Type: application/json
+
+{
+ "name": "OpenAPI"
+}
+
+### DELETE - /buckets/:id
+DELETE {{BASE_URL}}/buckets/9901f67f-2ac4-48b7-8e65-32165f1b5e51

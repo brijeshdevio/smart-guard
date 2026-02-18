@@ -22,4 +22,6 @@ export const MESSAGES = {
   NO_REFRESH_TOKEN: 'No refresh token found.',
   NO_ACCESS_TOKEN: 'No access token found.',
   UNAUTHORIZED: 'You are not logged in. Please login to continue.',
+  BUCKET_CREATION_SUCCESS: 'Bucket created successfully.',
+  BUCKET_UPDATE_SUCCESS: 'Bucket updated successfully.',
 };
